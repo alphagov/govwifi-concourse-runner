@@ -20,6 +20,6 @@ ARG DOCKER_COMPOSE_VERSION='1.24.0'
 
 RUN pip --no-cache-dir install "docker-compose==${DOCKER_COMPOSE_VERSION}"
 
-ADD docker-helpers.sh .
+COPY ./docker-helpers.sh .
 
 CMD "ash"
