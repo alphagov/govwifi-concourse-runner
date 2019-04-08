@@ -18,7 +18,7 @@ RUN apk add --no-cache \
 
 ARG DOCKER_COMPOSE_VERSION='1.24.0'
 
-RUN pip --no-cache-dir install "docker-compose==${DOCKER_COMPOSE_VERSION}"
+RUN pip --no-cache-dir install "docker-compose==${DOCKER_COMPOSE_VERSION}" "awscli"
 
 COPY ./docker-helpers.sh .
 
