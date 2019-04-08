@@ -1,0 +1,30 @@
+resources:
+  - name: govwifi-concourse-runner
+    type: git
+    source:
+      uri: "https://github.com/alphagov/govwifi-concourse-runner.git"
+      branch: "master"
+
+  - name: repository
+    type: docker-image
+    source:
+      repository: "((readonly_private_ecr_repo_url))"
+      tag: concourse-runner-latest
+  
+  - name: upstream
+    type: registry-image
+    check_every: '6h'
+    source:
+      repository: docker
+      tag: '18.09'
+
+jobs:
+  - name: build
+    plan:
+    - get: govwifi-concourse-runner
+      trigger: true
+    - get: upstream
+      trigger: true
+    - put: repository
+      params:
+        build: govwifi-concourse-runner
