@@ -1,2 +1,5 @@
 .*
 **/.*
+
+# Our docker image shouldn't be exposed to the concourse pipelines
+ci
