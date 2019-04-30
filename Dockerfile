@@ -24,7 +24,7 @@ ARG DOCKER_COMPOSE_VERSION='1.24.0'
 RUN pip --no-cache-dir install "docker-compose==${DOCKER_COMPOSE_VERSION}" "awscli"
 
 COPY ./docker-helpers.sh .
-COPY ./build .
+COPY ./build /usr/bin/build
 
 COPY --from=img /usr/bin/img /usr/bin/img
 COPY --from=img /usr/bin/newuidmap /usr/bin/newuidmap
