@@ -35,7 +35,8 @@ WORKDIR /
 RUN pip --no-cache-dir install "docker-compose==${DOCKER_COMPOSE_VERSION}" "awscli"
 
 
-COPY ./docker-helpers.sh ./entrypoint /
+COPY ./docker-helpers.sh /
+COPY ./docker-wrapper /usr/local/bin/
 
-ENTRYPOINT [ "/entrypoint" ]
+ENTRYPOINT [ "docker-wrapper" ]
 CMD "ash"

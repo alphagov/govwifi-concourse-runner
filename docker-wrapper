@@ -1,11 +1,8 @@
 #!/usr/bin/dumb-init /bin/bash
 
-echo "entering!"
-
 {
   . /docker-helpers.sh
   function cleanup_docker() {
-    echo "starting cleanup:"
     clean_docker || true
     stop_docker || true
   }
