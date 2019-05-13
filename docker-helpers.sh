@@ -89,6 +89,5 @@ function stop_docker() {
 function clean_docker() {
   [[ ! -f /tmp/docker.pid ]] && return 0;
   echo "cleaning up docker"
-  docker rm -fv $(docker ps -aq) >/dev/null 2>&1 || true
-  docker rmi -f $(docker images -q) >/dev/null 2>&1 || true
+  docker system prune -af --volumes >/dev/null 2>&1 || true
 }
