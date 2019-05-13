@@ -8,6 +8,7 @@ RUN apk add --no-cache \
   # dockerd dependencies
   util-linux \
   iptables \
+  dumb-init \
   # docker-compose dependencies
   py-pip \
   python-dev \
@@ -33,6 +34,9 @@ RUN gpg --import "/tmp/AB9942E6D4A4CFC3412620A749FC7012A5DE03AE.asc" \
 WORKDIR /
 RUN pip --no-cache-dir install "docker-compose==${DOCKER_COMPOSE_VERSION}" "awscli"
 
-COPY ./docker-helpers.sh .
 
+COPY ./docker-helpers.sh .
+COPY ./entrypoint.sh .
+
+ENTRYPOINT [ "dumb-init", "--", "/entrypoint.sh" ]
 CMD "ash"
