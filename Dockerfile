@@ -17,19 +17,22 @@ RUN apk add --no-cache \
   # passwordstore deps
   git \
   gnupg \
+  # dockerd dependencies	
+  util-linux \	
+  iptables \
   # awscli deps
   python \
   py-pip \
- && git clone https://git.zx2c4.com/password-store -b $PASSWORD_STORE_VERSION \
- && cd password-store \
- && wget "http://www.zx2c4.com/keys/AB9942E6D4A4CFC3412620A749FC7012A5DE03AE.asc" \
- && gpg --import AB9942E6D4A4CFC3412620A749FC7012A5DE03AE.asc \
- && git tag --verify $PASSWORD_STORE_VERSION \
- && make install \
- && cd - \
- && rm -rf password-store \
- && pip install awscli==$AWSCLI_VERSION \
- && apk --purge -v del py-pip
+  && git clone https://git.zx2c4.com/password-store -b $PASSWORD_STORE_VERSION \
+  && cd password-store \
+  && wget "http://www.zx2c4.com/keys/AB9942E6D4A4CFC3412620A749FC7012A5DE03AE.asc" \
+  && gpg --import AB9942E6D4A4CFC3412620A749FC7012A5DE03AE.asc \
+  && git tag --verify $PASSWORD_STORE_VERSION \
+  && make install \
+  && cd - \
+  && rm -rf password-store \
+  && pip install awscli==$AWSCLI_VERSION \
+  && apk --purge -v del py-pip
 
 COPY ./docker-helpers.sh .
 
