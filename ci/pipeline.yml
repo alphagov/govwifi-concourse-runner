@@ -23,13 +23,15 @@ resources:
     source:
       repository: "((readonly_private_ecr_repo_url))"
       tag: concourse-runner-latest
-  
+
   - name: upstream
     type: registry-image
     check_every: '6h'
     source:
       repository: docker
       tag: '18.09'
+      username: ((docker_hub_username))
+      password: ((docker_hub_authtoken))
 
 jobs:
   - name: self-update
