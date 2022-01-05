@@ -1,4 +1,4 @@
-FROM docker:18.09
+FROM docker:20.10.12
 
 RUN apk add --no-cache \
   # our dependencies
@@ -11,7 +11,9 @@ RUN apk add --no-cache \
   dumb-init \
   # docker-compose dependencies
   py-pip \
-  python-dev \
+  python3-dev \
+  rust \
+  cargo \
   libffi-dev \
   openssl-dev \
   gcc \
@@ -20,7 +22,7 @@ RUN apk add --no-cache \
   git \
   gnupg
 
-ARG DOCKER_COMPOSE_VERSION='1.24.0'
+ARG DOCKER_COMPOSE_VERSION='1.29.2'
 ARG PASSWORD_STORE_VERSION='1.7.3'
 
 WORKDIR /tmp/password-store
